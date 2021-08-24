@@ -1,0 +1,22 @@
+sw_volume: 100
+audio_device_state:1:mpd alsamixer-output
+audio_device_state:1:toggle_visualizer
+state: play
+current: 4
+time: 119.979000
+random: 0
+repeat: 1
+single: 0
+consume: 0
+crossfade: 0
+mixrampdb: 0.000000
+mixrampdelay: -1.000000
+playlist_begin
+0:Fav/videoplayback.m4a
+1:Fav/FELIX IRWAN ADE GOVINDA FADLY PADI - TANPA BATAS WAKTU.mp3
+2:Fav/FELIX IRWAN BUDI DOREMI - LIRIK MELUKIS SENJA.mp3
+3:Fav/Fiersa Besari - Waktu Yang Salah Felix Cover.mp3
+4:Fav/KEKASIH BAYANGAN CHAKRA KHAN [ LIRIK ] FELIX IRWAN COVER.mp3
+5:Fav/KENANGLAH AKU - NAFF ( FELIX IRWAN COVER ).mp3
+6:Fav/Pongki Barata - Aku Milikmu Malam Ini Felix Cover.mp3
+playlist_end

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+source ~/.config/bspwm/.bspwm
+
+# kill ui
+killall dunst 
+killall polybar
+case "$1" in
+	1) sed -i '2s_.*_THEME="iDark"_' ~/.config/bspwm/.bspwm ;;
+	2)	sed -i '2s_.*_THEME="iLight"_' ~/.config/bspwm/.bspwm ;;
+	*)
+	case "$THEME" in
+		iLight)	sed -i '2s_.*_THEME="iDark"_' ~/.config/bspwm/.bspwm ;;
+		iDark) sed -i '2s_.*_THEME="iLight"_' ~/.config/bspwm/.bspwm ;;
+		*)	sed -i '2s_.*_THEME="iLight"_' ~/.config/bspwm/.bspwm ;;
+	esac
+	;;
+esac
+
+~/.config/bspwm/startup &> /dev/null
+#bspc wm -r

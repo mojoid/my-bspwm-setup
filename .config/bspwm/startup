@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+source ~/.config/bspwm/.bspwm
+
+set_light() {
+	# polybar
+	sed -i -e 's/background = #.*/background = #FDFDFD/g' ~/.config/bspwm/panel/colors.ini
+	sed -i -e 's/foreground = #.*/foreground = #8F8F8F/g' ~/.config/bspwm/panel/colors.ini
+	# rofi
+	sed -i -e "s/background:.*/background: #FDFDFDFF;/g" ~/.config/bspwm/rofi/colors.rasi
+	sed -i -e "s/foreground:.*/foreground: #2E2E2EFF;/g" ~/.config/bspwm/rofi/colors.rasi
+	# GTK
+	sed -i '5s_gtk-theme-name=.*_gtk-theme-name="ZorinBlue"_' ~/.gtkrc-2.0
+	sed -i '10s_gtk-theme-name=.*_gtk-theme-name=ZorinBlue_' ~/.config/gtk-3.0/settings.ini
+	# Cursor
+	#sed -i 's_Inherits=.*_Inherits=Inherits=Bibata-Modern-Ice_g' ~/.icons/default/index.theme
+	sed -i '8s_gtk-cursor-theme-name=.*_gtk-cursor-theme-name="Bibata-Modern-Ice"_' ~/.gtkrc-2.0
+	sed -i '16s_gtk-cursor-theme-name=.*_gtk-cursor-theme-name=Bibata-Modern-Ice_' ~/.config/gtk-3.0/settings.ini
+	# Icon
+	sed -i '6s_gtk-icon-theme-name=.*_gtk-icon-theme-name="Papirus-Light"_' ~/.gtkrc-2.0
+	sed -i '8s_gtk-icon-theme-name=.*_gtk-icon-theme-name=Papirus-Light_' ~/.config/gtk-3.0/settings.ini
+	#sed -i '4s\icon_theme=.*\icon_theme=ilight\' ~/.config/qt5ct/qt5ct.conf
+	}
+set_dark() {
+	# polybar
+	sed -i -e 's/background = #.*/background = #1A1C1E/g' ~/.config/bspwm/panel/colors.ini
+	sed -i -e 's/foreground = #.*/foreground = #8F8F8F/g' ~/.config/bspwm/panel/colors.ini
+	# rofi
+	sed -i -e "s/background:.*/background: #1A1C1EFF;/g" ~/.config/bspwm/rofi/colors.rasi
+	sed -i -e 's/foreground:.*/foreground: #8D8D8DFF;/g' ~/.config/bspwm/rofi/colors.rasi
+	# GTK
+	sed -i '5s_gtk-theme-name=.*_gtk-theme-name="Material-Black-Pistachio-4.0"_' ~/.gtkrc-2.0
+	sed -i '10s_gtk-theme-name=.*_gtk-theme-name=Material-Black-Pistachio-4.0_' ~/.config/gtk-3.0/settings.ini
+	# Cursor
+	#sed -i 's_Inherits=.*_Inherits=Inherits=Bibata-Modern-Ice_g' ~/.icons/default/index.theme
+	sed -i '8s_gtk-cursor-theme-name=.*_gtk-cursor-theme-name="Bibata-Modern-Ice"_' ~/.gtkrc-2.0
+	sed -i '16s_gtk-cursor-theme-name=.*_gtk-cursor-theme-name=Bibata-Modern-Ice_' ~/.config/gtk-3.0/settings.ini
+	# Icon
+	sed -i '6s_gtk-icon-theme-name=.*_gtk-icon-theme-name="Sardi-Mono"_' ~/.gtkrc-2.0
+	sed -i '8s_gtk-icon-theme-name=.*_gtk-icon-theme-name=Sardi-Mono_' ~/.config/gtk-3.0/settings.ini
+	#sed -i '4s\icon_theme=.*\icon_theme=idark\' ~/.config/qt5ct/qt5ct.conf
+	}
+case "$THEME" in
+iLight)
+	dunst -config ~/.config/dunst/dunstrc-left &
+	$NOTIFIER -r 13 -i "$ICONDIR/theme.png" -t 5000 -u low "Light Mode" "Change Theme"
+	set_light
+	~/.config/bspwm/wallpaper/cw -set light1.jpg
+	xrdb ~/.config/bspwm/ilight/.Xresources
+	timeout 0.1s xsettingsd -c ~/.config/bspwm/ilight/.xsettingsd ;;
+iDark)
+	dunst -config ~/.config/dunst/dunstrc-dark-left &
+	$NOTIFIER -r 13 -i "$ICONDIR/theme.png" -t 5000 -u low "Dark Mode" "Change Theme"
+	set_dark
+	~/.config/bspwm/wallpaper/cw -set dark1.jpeg
+	xrdb ~/.config/bspwm/idark/.Xresources
+	timeout 0.1s xsettingsd -c ~/.config/bspwm/idark/.xsettingsd ;;
+esac
+
+~/.config/bspwm/panel/launch.sh &
+

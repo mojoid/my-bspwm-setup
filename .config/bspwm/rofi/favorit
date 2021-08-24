@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+if [[ "$@" == "quit" ]]
+then
+	exit 0
+fi
+
+shutdown() {
+	coproc bash -c "poweroff"
+	}
+reboot() {
+	coproc bash -c "reboot"
+	}
+logout() {
+	coproc bash -c "bspc quit"
+	}
+back() {
+	coproc bash -c "~/.config/bspwm/rofi/rofi"
+	}
+set_powermenu() {
+	echo -e "back\nshutdown\nreboot\nlock\nsuspend\nlogout"
+	}
+
+if [ "$@" ]; then
+	case "$@" in
+		*polybar*) coproc ~/.config/bspwm/panel/color-switch.sh ;;
+		*musik) coproc ~/.scripts/sound/musik ;;
+		*powermenu) set_powermenu ;;
+	esac
+else
+	echo "♥ polybar themes"
+	echo "♥ musik"
+	echo "♥ screenshot"
+	echo "♥ powermenu"
+fi
+"$@"
+
